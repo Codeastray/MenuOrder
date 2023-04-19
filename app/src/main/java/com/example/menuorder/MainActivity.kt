@@ -7,10 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.menuorder.Navigation.MenuNavGraph
+import com.example.menuorder.ui.AppViewModelProvider
+import com.example.menuorder.ui.home.MenuInsertViewModel
 import com.example.menuorder.ui.theme.MenuOrderTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var viewModel: MenuInsertViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,11 +25,18 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MenuNavGraph()
+                    viewModel = viewModel(factory = AppViewModelProvider.Factory)
+                    MenuNavGraph(viewModel = viewModel)
                 }
             }
         }
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.deleteAllItem()
+        viewModel.clearBadgeNumber()
     }
 
 }

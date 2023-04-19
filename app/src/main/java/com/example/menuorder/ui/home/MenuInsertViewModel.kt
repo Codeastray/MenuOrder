@@ -11,6 +11,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.menuorder.R
+import com.example.menuorder.data.DishDao
+import com.example.menuorder.data.DrinkDao
 import com.example.menuorder.data.MenuRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -22,7 +24,9 @@ import kotlinx.coroutines.withContext
 
 class MenuInsertViewModel(
     private val savedStateHandle: SavedStateHandle,
-    private val menuRepository: MenuRepository
+    private val menuRepository: MenuRepository,
+    private val dishDao: DishDao,
+    private val drinkDao: DrinkDao,
 ) : ViewModel() {
     private val _badgeNumber = MutableStateFlow(mutableMapOf<Int, Int>())
     val badgeNumber: StateFlow<MutableMap<Int, Int>> = _badgeNumber.asStateFlow()
@@ -81,6 +85,13 @@ class MenuInsertViewModel(
         drinksList.removeAll { it.drink_name.isNullOrEmpty() }
     }
 
+    fun deleteAllItem() {
+        viewModelScope.launch {
+            dishDao.deleteAllDishes()
+            drinkDao.deleteAllDrinks()
+        }
+
+    }
     fun deleteUiState(name: String) {
         val deleteDishesList = dishesList.map { dish ->
             if (dish.dish_name == name) {

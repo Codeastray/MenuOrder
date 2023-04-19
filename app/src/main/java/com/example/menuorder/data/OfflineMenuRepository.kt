@@ -23,7 +23,7 @@ class OfflineMenuRepository(
 
     override suspend fun updateDish(dish:Dish)= dishDao.update(dish)
 
-    override suspend fun deleteAllDishes() = dishDao.deleteAllDishes()
+    override  suspend fun deleteAllDishes() = dishDao.deleteAllDishes()
 
     override suspend fun checkDishDelete(dish: Dish)= dishDao.checkDishDelete(dish)
     //--------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ class OfflineMenuRepository(
 
     override suspend fun updateDrink(drink: Drink)= drinkDao.update(drink)
 
-    override suspend fun deleteAllDrinks() = drinkDao.deleteAllDrinks()
+    override  suspend fun deleteAllDrinks() = drinkDao.deleteAllDrinks()
 
     override  suspend fun checkDrinkDelete(drink: Drink) =  drinkDao.checkDrinkDelete(drink)
 }

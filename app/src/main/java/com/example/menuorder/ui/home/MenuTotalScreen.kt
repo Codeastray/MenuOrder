@@ -239,7 +239,7 @@ fun MenuTotalScreen(
                         elevation = ButtonDefaults.buttonElevation(6.dp),
                         onClick = {
                             coroutineScope.launch {
-                                viewModel.deleteAllItem()
+                                insertViewModel.deleteAllItem()
                                 insertViewModel.setResetUI(true)
                             }
                             navBackToMenuOrder()

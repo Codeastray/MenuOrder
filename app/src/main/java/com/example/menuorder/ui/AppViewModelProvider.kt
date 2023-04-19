@@ -21,22 +21,24 @@ object AppViewModelProvider {
     val Factory = viewModelFactory {
         // Initializer for ItemEditViewModel
         initializer {
-            val menuRepository = menuApplication().container.menuRepository
-            val offlineMenuRepository = menuRepository as OfflineMenuRepository
-            val dishDao = offlineMenuRepository.dishDao
-            val drinkDao = offlineMenuRepository.drinkDao
+
             MenuTotalViewModel(
                 this.createSavedStateHandle(),
                 menuApplication().container.menuRepository,
-                dishDao = dishDao,
-                drinkDao = drinkDao
+
             )
         }
 
         initializer {
+            val menuRepository = menuApplication().container.menuRepository
+            val offlineMenuRepository = menuRepository as OfflineMenuRepository
+            val dishDao = offlineMenuRepository.dishDao
+            val drinkDao = offlineMenuRepository.drinkDao
             MenuInsertViewModel(
                 this.createSavedStateHandle(),
-                menuApplication().container.menuRepository
+                menuApplication().container.menuRepository,
+                        dishDao = dishDao,
+                drinkDao = drinkDao
             )
         }
     }
