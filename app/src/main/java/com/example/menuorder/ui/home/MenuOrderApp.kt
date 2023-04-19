@@ -1,4 +1,5 @@
 package com.example.menuorder.ui.home
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
@@ -57,10 +58,12 @@ import com.example.menuorder.ui.theme.*
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.util.*
+
 object MenuDestination : NavigationDestination {
     override val route = "Menu"
     override val titleRes = R.string.app_name
 }
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -98,9 +101,10 @@ fun MenuOrderApp(
             modifier = modifier.padding(innerPadding),
             viewModel = viewModel,
             navController = navController,
-            )
+        )
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuAppBar(
@@ -128,6 +132,7 @@ fun MenuAppBar(
         }
     )
 }
+
 @Composable
 fun MenuOrderList(
     menuUiState: MenuUiState,
@@ -293,9 +298,10 @@ fun MenuOrderList(
                     )
                 }
             },
-            )
+        )
     }
 }
+
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -357,7 +363,7 @@ fun MealOrderCard(
                 modifier = Modifier
                     .size(75.dp)
                     .offset(x = -130.dp, y = 10.dp),
-                ) {
+            ) {
                 Icon(
                     modifier = Modifier.size(75.dp),
                     imageVector = Icons.Filled.Delete,
@@ -401,7 +407,7 @@ fun MealOrderCard(
         elevation = CardDefaults.cardElevation(8.dp),
         colors = cardColors(MealCard),
         shape = RoundedCornerShape(16.dp),
-        ) {
+    ) {
         Text(
             style = MaterialTheme.typography.bodySmall,
             text = LocalContext.current.getString(meal.meal),
@@ -424,6 +430,7 @@ fun MealOrderCard(
         )
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DrinkOrderCard(
@@ -482,7 +489,7 @@ fun DrinkOrderCard(
                 modifier = Modifier
                     .size(75.dp)
                     .offset(x = -130.dp, y = 10.dp),
-                ) {
+            ) {
                 Icon(
                     modifier = Modifier.size(75.dp),
                     imageVector = Icons.Filled.Delete,
@@ -549,6 +556,7 @@ fun DrinkOrderCard(
         )
     }
 }
+
 @Composable
 fun ToppingOrderCard(
     topping: Toppings,
@@ -591,6 +599,7 @@ fun ToppingOrderCard(
         )
     }
 }
+
 @Preview
 @Composable
 private fun MenuOrderAppPreview() {

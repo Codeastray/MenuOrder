@@ -1,4 +1,5 @@
 package com.example.menuorder.ui.home
+
 import android.util.Log
 import androidx.annotation.InspectableProperty
 import androidx.compose.runtime.LaunchedEffect
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 class MenuInsertViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val menuRepository: MenuRepository
@@ -29,12 +31,15 @@ class MenuInsertViewModel(
     fun clearBadgeNumber() {
         badgeNumber.value.clear()
     }
+
     fun setResetUI(value: Boolean) {
         _resetUI.value = value
     }
+
     fun dishCard(key: Int, value: Int) {
         _badgeNumber.value[key] = value
     }
+
     var menuUiState by mutableStateOf(MenuUiState())
         private set
     var menuUiStates = mutableListOf<MenuUiState>()
@@ -75,6 +80,7 @@ class MenuInsertViewModel(
         dishesList.removeAll { it.dish_name.isNullOrEmpty() }
         drinksList.removeAll { it.drink_name.isNullOrEmpty() }
     }
+
     fun deleteUiState(name: String) {
         val deleteDishesList = dishesList.map { dish ->
             if (dish.dish_name == name) {
@@ -95,6 +101,7 @@ class MenuInsertViewModel(
         drinksList.clear()
         drinksList.addAll(deleteDrinkList)
     }
+
     fun clearAllList() {
         viewModelScope.launch {
             delay(1000)
@@ -102,6 +109,7 @@ class MenuInsertViewModel(
             drinksList.clear()
         }
     }
+
     suspend fun saveItem() {
         viewModelScope.launch {
             dishesList.forEach { dishSet ->
@@ -131,12 +139,14 @@ class MenuInsertViewModel(
         }
     }
 }
+
 data class DishSet(
     val dish_id: Int = 0,
     val dish_name: String,
     val dish_price: String,
     val dish_quantity: Int,
 )
+
 data class DrinkSet(
     val drink_id: Int = 0,
     val drink_name: String,

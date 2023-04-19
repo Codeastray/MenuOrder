@@ -1,4 +1,5 @@
 package com.example.menuorder.ui.home
+
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -37,12 +38,14 @@ import com.example.menuorder.data.Drink
 import com.example.menuorder.ui.AppViewModelProvider
 import com.example.menuorder.ui.theme.*
 import kotlinx.coroutines.launch
+
 object MenuTotalDestination : NavigationDestination {
     override val route = "item_details"
     override val titleRes = R.string.app_name
     const val toppingName = "toppingName"
     val routeWithArgs = "$route/{$toppingName}"
 }
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -254,6 +257,7 @@ fun MenuTotalScreen(
         }
     }
 }
+
 @Composable
 fun DishTotalItem(
     dishItem: Dish
@@ -262,7 +266,8 @@ fun DishTotalItem(
         modifier = Modifier
             .padding(vertical = 8.dp, horizontal = 40.dp)
     ) {
-        Surface(modifier = Modifier.padding(4.dp), shadowElevation = 4.dp,
+        Surface(
+            modifier = Modifier.padding(4.dp), shadowElevation = 4.dp,
             shape = RoundedCornerShape(16.dp),
             color = Color.White
         ) {
@@ -337,6 +342,7 @@ fun DishTotalItem(
         }
     }
 }
+
 @Composable
 fun DrinkTotalItem(
     drinkItem: Drink
@@ -422,6 +428,7 @@ fun DrinkTotalItem(
         }
     }
 }
+
 @Composable
 fun ToppingTotalItem(
     toppingName: Int
@@ -504,6 +511,7 @@ fun ToppingTotalItem(
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 private fun MenuOrderAppPreview() {
