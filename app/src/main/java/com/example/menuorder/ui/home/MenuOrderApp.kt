@@ -1,5 +1,4 @@
 package com.example.menuorder.ui.home
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
@@ -22,7 +21,6 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.material3.Badge
 import androidx.compose.material3.CardDefaults.cardColors
-
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -33,8 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalConsumer
-
-
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -61,13 +57,10 @@ import com.example.menuorder.ui.theme.*
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.util.*
-
 object MenuDestination : NavigationDestination {
     override val route = "Menu"
     override val titleRes = R.string.app_name
-
 }
-
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -78,10 +71,8 @@ fun MenuOrderApp(
     navController: NavHostController = rememberNavController()
 ) {
 //    val backStackEntry by navController.currentBackStackEntryAsState()
-
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
-
     Scaffold(
         topBar = {
             MenuAppBar(
@@ -107,13 +98,9 @@ fun MenuOrderApp(
             modifier = modifier.padding(innerPadding),
             viewModel = viewModel,
             navController = navController,
-
             )
-
     }
-
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuAppBar(
@@ -141,7 +128,6 @@ fun MenuAppBar(
         }
     )
 }
-
 @Composable
 fun MenuOrderList(
     menuUiState: MenuUiState,
@@ -156,7 +142,6 @@ fun MenuOrderList(
     modifier: Modifier = Modifier,
     viewModel: MenuInsertViewModel,
     navController: NavHostController,
-
 ) {
     var selectedTopping by remember { mutableStateOf(4) }
 //    val badgeNumbers = remember { mutableStateMapOf<Int, Int>() }
@@ -180,7 +165,6 @@ fun MenuOrderList(
                 fontSize = 30.sp
             )
         }
-
         items(mealList, key = { it.id }) { meal ->
             MealOrderCard(
                 meal,
@@ -190,7 +174,6 @@ fun MenuOrderList(
                 context = context,
                 viewModel = viewModel,
                 navController = navController,
-
             )
         }
         item(
@@ -232,7 +215,6 @@ fun MenuOrderList(
                 onClick = {
                     selectedTopping = topping.id
                     viewModel.dishCard(99, selectedTopping)
-
                 },
                 viewModel = viewModel,
                 selectedTopping = selectedTopping
@@ -244,24 +226,20 @@ fun MenuOrderList(
             }
         ) {
             Box(
-
             ) {
                 Button(
                     modifier = Modifier
                         .fillMaxHeight()
                         .padding(top = 10.dp, bottom = 10.dp)
                         .width(250.dp)
-
                         .align(Center)
                         .border(width = 2.dp, color = ButtonColor, shape = CircleShape),
                     colors = ButtonDefaults.buttonColors(Color.White),
                     shape = ButtonDefaults.outlinedShape,
                     elevation = ButtonDefaults.buttonElevation(6.dp),
                     onClick = {
-
                         val hasZeroQuantity =
                             viewModel.dishesList.all { it.dish_quantity == 0 } || viewModel.drinksList.all { it.drink_quantity == 0 }
-
                         if (hasZeroQuantity) {
                             noOrder = true
                         } else {
@@ -278,22 +256,18 @@ fun MenuOrderList(
                     )
                 }
             }
-
         }
     }
     if (noOrder) {
         AlertDialog(
             properties = DialogProperties(usePlatformDefaultWidth = false),
             modifier = Modifier
-
                 .fillMaxWidth()
                 .padding(horizontal = 40.dp),
             containerColor = Color.White,
             onDismissRequest = { noOrder = false },
             title = {
-
                 Text(
-
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     fontSize = 40.sp,
@@ -319,11 +293,9 @@ fun MenuOrderList(
                     )
                 }
             },
-
             )
     }
 }
-
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -335,14 +307,11 @@ fun MealOrderCard(
     context: Context,
     viewModel: MenuInsertViewModel,
     navController: NavHostController,
-
 ) {
     val coroutineScope = rememberCoroutineScope()
     var badgeNumber by remember { mutableStateOf(0) }
     val badgeNumberKeep by viewModel.badgeNumber.collectAsState()
     badgeNumber = badgeNumberKeep.getOrPut(meal.hashCode()) { 0 }
-
-
     Box(
         modifier = Modifier
             .size(height = 180.dp, width = 180.dp)
@@ -381,21 +350,16 @@ fun MealOrderCard(
                 onClick = {
                     badgeNumber -= 1
                     viewModel.dishCard(meal.hashCode(), badgeNumber)
-
                     deleteUiState(
                         context.getString(meal.meal)
                     )
-
                 },
                 modifier = Modifier
                     .size(75.dp)
-
                     .offset(x = -130.dp, y = 10.dp),
-
                 ) {
                 Icon(
                     modifier = Modifier.size(75.dp),
-
                     imageVector = Icons.Filled.Delete,
                     contentDescription = "Close"
                 )
@@ -413,7 +377,6 @@ fun MealOrderCard(
             .size(height = 180.dp, width = 180.dp)
             .padding(9.dp)
             .clickable {
-
                 badgeNumber += 1
                 viewModel.dishCard(meal.hashCode(), badgeNumber)
                 val payPrice = when (context.getString(meal.meal)) {
@@ -438,7 +401,6 @@ fun MealOrderCard(
         elevation = CardDefaults.cardElevation(8.dp),
         colors = cardColors(MealCard),
         shape = RoundedCornerShape(16.dp),
-
         ) {
         Text(
             style = MaterialTheme.typography.bodySmall,
@@ -446,7 +408,6 @@ fun MealOrderCard(
             fontSize = 30.sp
         )
         var imageResource by remember { mutableStateOf(R.drawable.cake) }
-
         imageResource = when (stringResource(meal.meal)) {
             "巧克力蛋糕" -> R.drawable.cake
             "雞排咖哩飯" -> R.drawable.chicken_carry
@@ -455,7 +416,6 @@ fun MealOrderCard(
             "豬肉火鍋" -> R.drawable.pork
             else -> R.drawable.tiramisu
         }
-
         Image(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(imageResource),
@@ -464,8 +424,6 @@ fun MealOrderCard(
         )
     }
 }
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DrinkOrderCard(
@@ -479,7 +437,6 @@ fun DrinkOrderCard(
     var badgeNumber by remember { mutableStateOf(0) }
     val badgeNumberKeep by viewModel.badgeNumber.collectAsState()
     badgeNumber = badgeNumberKeep.getOrPut(drink.hashCode()) { 0 }
-
     Box(
         modifier = Modifier
             .size(height = 180.dp, width = 180.dp)
@@ -521,17 +478,13 @@ fun DrinkOrderCard(
                     deleteUiState(
                         context.getString(drink.drink)
                     )
-
                 },
                 modifier = Modifier
                     .size(75.dp)
-
                     .offset(x = -130.dp, y = 10.dp),
-
                 ) {
                 Icon(
                     modifier = Modifier.size(75.dp),
-
                     imageVector = Icons.Filled.Delete,
                     contentDescription = "Close"
                 )
@@ -569,7 +522,6 @@ fun DrinkOrderCard(
                         dish_quantity = 0,
                     )
                 )
-
             },
         elevation = CardDefaults.cardElevation(8.dp),
         colors = cardColors(DrinkCard),
@@ -581,7 +533,6 @@ fun DrinkOrderCard(
             fontSize = 30.sp
         )
         var imageResource by remember { mutableStateOf(R.drawable.cake) }
-
         imageResource = when (stringResource(drink.drink)) {
             "柳橙汁" -> R.drawable.orange
             "可樂" -> R.drawable.coke
@@ -590,7 +541,6 @@ fun DrinkOrderCard(
             "水果茶" -> R.drawable.fruit
             else -> R.drawable.milk_tea
         }
-
         Image(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(imageResource),
@@ -599,7 +549,6 @@ fun DrinkOrderCard(
         )
     }
 }
-
 @Composable
 fun ToppingOrderCard(
     topping: Toppings,
@@ -629,13 +578,11 @@ fun ToppingOrderCard(
             fontSize = 30.sp
         )
         var imageResource by remember { mutableStateOf(R.drawable.cake) }
-
         imageResource = when (topping.id) {
             0 -> R.drawable.thousand
             1 -> R.drawable.tea_souce
             else -> R.drawable.soy_paste
         }
-
         Image(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(imageResource),
@@ -644,9 +591,7 @@ fun ToppingOrderCard(
         )
     }
 }
-
 @Preview
 @Composable
 private fun MenuOrderAppPreview() {
-
 }

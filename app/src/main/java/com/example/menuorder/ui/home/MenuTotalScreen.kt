@@ -1,6 +1,4 @@
 package com.example.menuorder.ui.home
-
-
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -39,14 +37,12 @@ import com.example.menuorder.data.Drink
 import com.example.menuorder.ui.AppViewModelProvider
 import com.example.menuorder.ui.theme.*
 import kotlinx.coroutines.launch
-
 object MenuTotalDestination : NavigationDestination {
     override val route = "item_details"
     override val titleRes = R.string.app_name
     const val toppingName = "toppingName"
     val routeWithArgs = "$route/{$toppingName}"
 }
-
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,7 +53,6 @@ fun MenuTotalScreen(
     navController: NavHostController = rememberNavController(),
     navBackToMenuOrder: () -> Unit
 ) {
-
     val totalDishUiState by viewModel.totalDishUiState.collectAsState()
     val totalDrinkUiState by viewModel.totalDrinkUiState.collectAsState()
     val toppingName = viewModel.toppingName
@@ -65,9 +60,6 @@ fun MenuTotalScreen(
     var showSuccessDialog by remember { mutableStateOf(false) }
     var total = 0
     val coroutineScope = rememberCoroutineScope()
-
-
-
     totalDishUiState.dishList.forEach { dishItem ->
         total += dishItem.price * dishItem.quantity
     }
@@ -121,14 +113,12 @@ fun MenuTotalScreen(
                                 else -> "尚未選擇醬料"
                             }
                         )
-
                         ToppingTotalItem(toppingName = toppingName)
                         Button(
                             modifier = Modifier
                                 .fillMaxHeight()
                                 .padding(top = 10.dp, bottom = 10.dp)
                                 .width(250.dp)
-
                                 .border(width = 2.dp, color = TopBar, shape = CircleShape),
                             colors = ButtonDefaults.buttonColors(Color.White),
                             shape = ButtonDefaults.outlinedShape,
@@ -145,9 +135,7 @@ fun MenuTotalScreen(
                 }
             }
         }
-
         if (showDialog) {
-
             AlertDialog(
                 modifier = Modifier
                     .border(
@@ -180,14 +168,12 @@ fun MenuTotalScreen(
                         }
                     )
                 },
-
                 confirmButton = {
                     Button(modifier = Modifier
                         .border(width = 2.dp, color = TopBar, shape = CircleShape),
                         colors = ButtonDefaults.buttonColors(TopBar),
                         shape = ButtonDefaults.outlinedShape,
                         elevation = ButtonDefaults.buttonElevation(6.dp),
-
                         onClick = {
                             // 在這裡實現結帳邏輯
                             showSuccessDialog = true
@@ -202,12 +188,10 @@ fun MenuTotalScreen(
                 dismissButton = {
                     Button(
                         modifier = Modifier
-
                             .border(width = 2.dp, color = TopBar, shape = CircleShape),
                         colors = ButtonDefaults.buttonColors(TopBar),
                         shape = ButtonDefaults.outlinedShape,
                         elevation = ButtonDefaults.buttonElevation(6.dp),
-
                         onClick = {
                             showDialog = false
                         }
@@ -238,22 +222,18 @@ fun MenuTotalScreen(
                         text = "付款成功"
                     )
                 },
-
                 text = {
                     Text(
-
                         fontSize = 40.sp,
                         text = "用餐愉快!!"
                     )
                 },
-
                 confirmButton = {
                     Button(modifier = Modifier
                         .padding(end = 30.dp),
                         colors = ButtonDefaults.buttonColors(TopBar),
                         shape = ButtonDefaults.outlinedShape,
                         elevation = ButtonDefaults.buttonElevation(6.dp),
-
                         onClick = {
                             coroutineScope.launch {
                                 viewModel.deleteAllItem()
@@ -274,8 +254,6 @@ fun MenuTotalScreen(
         }
     }
 }
-
-
 @Composable
 fun DishTotalItem(
     dishItem: Dish
@@ -283,7 +261,6 @@ fun DishTotalItem(
     Box(
         modifier = Modifier
             .padding(vertical = 8.dp, horizontal = 40.dp)
-
     ) {
         Surface(modifier = Modifier.padding(4.dp), shadowElevation = 4.dp,
             shape = RoundedCornerShape(16.dp),
@@ -309,12 +286,9 @@ fun DishTotalItem(
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         verticalAlignment = CenterVertically
                     ) {
-
                         Column(
-
                             horizontalAlignment = CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(2.dp)
-
                         ) {
                             Card(
                                 modifier = Modifier
@@ -324,10 +298,7 @@ fun DishTotalItem(
                                 elevation = CardDefaults.cardElevation(8.dp),
                                 shape = RoundedCornerShape(10.dp)
                             ) {
-
-
                                 var imageResource by remember { mutableStateOf(R.drawable.cake) }
-
                                 imageResource = when (dishItem.name) {
                                     "巧克力蛋糕" -> R.drawable.cake
                                     "雞排咖哩飯" -> R.drawable.chicken_carry
@@ -343,7 +314,6 @@ fun DishTotalItem(
                                 )
                             }
                             Text(
-
                                 fontSize = 20.sp,
                                 text = dishItem.name
                             )
@@ -367,8 +337,6 @@ fun DishTotalItem(
         }
     }
 }
-
-
 @Composable
 fun DrinkTotalItem(
     drinkItem: Drink
@@ -376,7 +344,6 @@ fun DrinkTotalItem(
     Box(
         modifier = Modifier
             .padding(vertical = 8.dp, horizontal = 40.dp)
-
     ) {
         Surface(
             modifier = Modifier.padding(4.dp),
@@ -417,7 +384,6 @@ fun DrinkTotalItem(
                                 shape = RoundedCornerShape(10.dp)
                             ) {
                                 var imageResource by remember { mutableStateOf(R.drawable.cake) }
-
                                 imageResource = when (drinkItem.name) {
                                     "柳橙汁" -> R.drawable.orange
                                     "可樂" -> R.drawable.coke
@@ -433,7 +399,6 @@ fun DrinkTotalItem(
                                 )
                             }
                             Text(
-
                                 fontSize = 20.sp,
                                 text = drinkItem.name
                             )
@@ -457,7 +422,6 @@ fun DrinkTotalItem(
         }
     }
 }
-
 @Composable
 fun ToppingTotalItem(
     toppingName: Int
@@ -465,7 +429,6 @@ fun ToppingTotalItem(
     Box(
         modifier = Modifier
             .padding(vertical = 8.dp, horizontal = 40.dp)
-
     ) {
         Surface(
             modifier = Modifier.padding(4.dp),
@@ -492,7 +455,6 @@ fun ToppingTotalItem(
                             start = 10.dp,
                             end = 8.dp
                         ),
-
                     horizontalAlignment = CenterHorizontally,
                 ) {
                     Card(
@@ -509,11 +471,9 @@ fun ToppingTotalItem(
                             0, 1, 2 -> CardDefaults.cardElevation(8.dp)
                             else -> CardDefaults.cardElevation(0.dp)
                         },
-
                         shape = RoundedCornerShape(10.dp)
                     ) {
                         var imageResource by remember { mutableStateOf(R.drawable.small_dish) }
-
                         imageResource = when (toppingName) {
                             0 -> R.drawable.thousand
                             1 -> R.drawable.tea_souce
@@ -521,13 +481,11 @@ fun ToppingTotalItem(
                             else -> R.drawable.small_dish
                         }
                         Image(
-
                             contentScale = ContentScale.Crop,
                             painter = painterResource(imageResource),
                             contentDescription = "little bum",
                         )
                     }
-
                 }
                 Text(
                     modifier = Modifier.padding(start = 115.dp),
@@ -542,14 +500,11 @@ fun ToppingTotalItem(
                         else -> ""
                     }
                 )
-
             }
         }
     }
 }
-
 @Preview(showBackground = true)
 @Composable
 private fun MenuOrderAppPreview() {
-
 }
