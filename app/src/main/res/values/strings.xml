@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">MenuOrder</string>
+    <string name="dish1">小籠包</string>
+    <string name="dish2">宮保雞丁</string>
+    <string name="dish3">雞排咖哩飯</string>
+    <string name="dish4">豬肉火鍋</string>
+    <string name="dish5">巧克力蛋糕</string>
+    <string name="dish6">提拉米蘇</string>
+    <string name="drink1">可樂</string>
+    <string name="drink2">柳橙汁</string>
+    <string name="drink3">可爾必思</string>
+    <string name="drink4">紅茶</string>
+    <string name="drink5">奶茶</string>
+    <string name="drink6">水果茶</string>
+
+    <string name="topping1">千島醬</string>
+    <string name="topping2">沙茶醬</string>
+    <string name="topping3">醬油膏</string>
+
+    <string name="meals">選餐</string>
+    <string name="toppings">配料</string>
+    <string name="drinks">飲料</string>
+</resources>
