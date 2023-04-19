@@ -123,17 +123,17 @@ class MenuInsertViewModel(
                 if (menuUiState.dish_quantity == 0) {
                     menuRepository.checkDishDelete(menuUiState.toDish())
                 }
-                drinksList.forEach { drinkSet ->
-                    menuUiState = menuUiState.copy(
-                        drink_id = drinkSet.drink_id,
-                        drink_name = drinkSet.drink_name,
-                        drink_price = drinkSet.drink_price,
-                        drink_quantity = drinkSet.drink_quantity
-                    )
-                    menuRepository.checkDrinkNameInsert(menuUiState.toDrink())
-                    if (menuUiState.drink_quantity == 0) { //在UI那邊還有設隱藏
-                        menuRepository.checkDrinkDelete(menuUiState.toDrink())
-                    }
+            }
+            drinksList.forEach { drinkSet ->
+                menuUiState = menuUiState.copy(
+                    drink_id = drinkSet.drink_id,
+                    drink_name = drinkSet.drink_name,
+                    drink_price = drinkSet.drink_price,
+                    drink_quantity = drinkSet.drink_quantity
+                )
+                menuRepository.checkDrinkNameInsert(menuUiState.toDrink())
+                if (menuUiState.drink_quantity == 0) { //在UI那邊還有設隱藏
+                    menuRepository.checkDrinkDelete(menuUiState.toDrink())
                 }
             }
         }
