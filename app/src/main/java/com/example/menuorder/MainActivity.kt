@@ -36,7 +36,6 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         super.onStop()
         viewModel.deleteAllItem()
-        viewModel.clearBadgeNumber()
     }
 
 }
