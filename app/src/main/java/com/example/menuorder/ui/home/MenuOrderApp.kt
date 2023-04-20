@@ -409,7 +409,7 @@ fun MealOrderCard(
         Text(
             style = MaterialTheme.typography.bodySmall,
             text = LocalContext.current.getString(meal.meal),
-            fontSize = 25.sp
+            fontSize = 24.sp
         )
         var imageResource by remember { mutableStateOf(R.drawable.cake) }
         imageResource = when (stringResource(meal.meal)) {
@@ -541,7 +541,7 @@ fun DrinkOrderCard(
         Text(
             style = MaterialTheme.typography.bodySmall,
             text = LocalContext.current.getString(drink.drink),
-            fontSize = 30.sp
+            fontSize = 24.sp
         )
         var imageResource by remember { mutableStateOf(R.drawable.cake) }
         imageResource = when (stringResource(drink.drink)) {
@@ -587,7 +587,7 @@ fun ToppingOrderCard(
         Text(
             style = MaterialTheme.typography.bodySmall,
             text = LocalContext.current.getString(topping.topping),
-            fontSize = 30.sp
+            fontSize = 24.sp
         )
         var imageResource by remember { mutableStateOf(R.drawable.cake) }
         imageResource = when (topping.id) {
