@@ -339,7 +339,8 @@ fun MealOrderCard(
                 )
             }
             Box(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
                     .zIndex(1f)
                     .size(height = 180.dp, width = 180.dp),
             ){
@@ -351,7 +352,8 @@ fun MealOrderCard(
                             context.getString(meal.meal)
                         )
                     },
-                    modifier = Modifier.size(75.dp)
+                    modifier = Modifier
+                        .size(75.dp)
                         .offset(x = (-15).dp, y = 112.dp),
 
                 ) {
@@ -362,7 +364,7 @@ fun MealOrderCard(
                         contentDescription = "Close"
                     )
                     Icon(
-                        modifier = Modifier.size(70.dp),
+                        modifier = Modifier.size(72.dp),
                         tint = TotalMealDelete,
                         imageVector = Icons.Filled.Delete,
                         contentDescription = "Close"
@@ -472,30 +474,36 @@ fun DrinkOrderCard(
                     fontSize = 27.sp,
                 )
             }
-            IconButton(
-                onClick = {
-                    badgeNumber -= 1
-                    viewModel.dishCard(drink.hashCode(), badgeNumber)
-                    deleteUiState(
-                        context.getString(drink.drink)
+            Box(  modifier = Modifier
+                .fillMaxSize()
+                .zIndex(1f)
+                .size(height = 180.dp, width = 180.dp), ){
+                IconButton(
+                    onClick = {
+                        badgeNumber -= 1
+                        viewModel.dishCard(drink.hashCode(), badgeNumber)
+                        deleteUiState(
+                            context.getString(drink.drink)
+                        )
+                    },
+                    modifier = Modifier
+                        .size(75.dp)
+                        .offset(x = (-15).dp, y = 112.dp),
+                ) {
+                    Icon(
+                        modifier = Modifier.size(75.dp),
+                        imageVector = Icons.Filled.Delete,
+                        contentDescription = "Close"
                     )
-                },
-                modifier = Modifier
-                    .size(75.dp)
-                    .offset(x = -130.dp, y = 10.dp),
-            ) {
-                Icon(
-                    modifier = Modifier.size(75.dp),
-                    imageVector = Icons.Filled.Delete,
-                    contentDescription = "Close"
-                )
-                Icon(
-                    modifier = Modifier.size(72.dp),
-                    tint = TotalMealDelete,
-                    imageVector = Icons.Filled.Delete,
-                    contentDescription = "Close"
-                )
+                    Icon(
+                        modifier = Modifier.size(72.dp),
+                        tint = TotalMealDelete,
+                        imageVector = Icons.Filled.Delete,
+                        contentDescription = "Close"
+                    )
+                }
             }
+
         }
     }
     Card(
