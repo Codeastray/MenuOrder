@@ -8,13 +8,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.*
 import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -23,39 +19,29 @@ import androidx.compose.material3.*
 import androidx.compose.material3.Badge
 import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.zIndex
 import com.example.menuorder.data.*
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.menuorder.Navigation.NavigationDestination
 import com.example.menuorder.R
-import com.example.menuorder.ui.AppViewModelProvider
 import com.example.menuorder.ui.theme.*
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -352,32 +338,40 @@ fun MealOrderCard(
                     fontSize = 27.sp,
                 )
             }
-            IconButton(
-                onClick = {
-                    badgeNumber -= 1
-                    viewModel.dishCard(meal.hashCode(), badgeNumber)
-                    deleteUiState(
-                        context.getString(meal.meal)
+            Box(
+                modifier = Modifier.fillMaxSize()
+                    .zIndex(1f)
+                    .size(height = 180.dp, width = 180.dp),
+            ){
+                IconButton(
+                    onClick = {
+                        badgeNumber -= 1
+                        viewModel.dishCard(meal.hashCode(), badgeNumber)
+                        deleteUiState(
+                            context.getString(meal.meal)
+                        )
+                    },
+                    modifier = Modifier.size(75.dp)
+                        .offset(x = (-15).dp, y = 112.dp),
+
+                ) {
+                    Icon(
+                        modifier = Modifier.size(75.dp),
+
+                        imageVector = Icons.Filled.Delete,
+                        contentDescription = "Close"
                     )
-                },
-                modifier = Modifier
-                    .size(75.dp)
-                    .offset(x = -130.dp, y = 10.dp),
-            ) {
-                Icon(
-                    modifier = Modifier.size(75.dp),
-                    imageVector = Icons.Filled.Delete,
-                    contentDescription = "Close"
-                )
-                Icon(
-                    modifier = Modifier.size(70.dp),
-                    tint = TotalMealDelete,
-                    imageVector = Icons.Filled.Delete,
-                    contentDescription = "Close"
-                )
+                    Icon(
+                        modifier = Modifier.size(70.dp),
+                        tint = TotalMealDelete,
+                        imageVector = Icons.Filled.Delete,
+                        contentDescription = "Close"
+                    )
+                }
             }
         }
     }
+
     Card(
         modifier = Modifier
             .size(height = 180.dp, width = 180.dp)
