@@ -2,6 +2,7 @@ package com.example.menuorder.ui.home
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -65,6 +66,7 @@ fun MenuTotalScreen(
     var showSuccessDialog by remember { mutableStateOf(false) }
     var total = 0
     val coroutineScope = rememberCoroutineScope()
+
     totalDishUiState.dishList.forEach { dishItem ->
         total += dishItem.price * dishItem.quantity
     }
