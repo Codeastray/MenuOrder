@@ -62,8 +62,10 @@ fun MenuOrderApp(
     navController: NavHostController = rememberNavController()
 ) {
 //    val backStackEntry by navController.currentBackStackEntryAsState()
+
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
+
     Scaffold(
         topBar = {
             MenuAppBar(
@@ -381,6 +383,7 @@ fun MealOrderCard(
             .size(height = 180.dp, width = 180.dp)
             .padding(9.dp)
             .clickable {
+                viewModel.deleteAllItem()
                 badgeNumber += 1
                 viewModel.dishCard(meal.hashCode(), badgeNumber)
                 val payPrice = when (context.getString(meal.meal)) {

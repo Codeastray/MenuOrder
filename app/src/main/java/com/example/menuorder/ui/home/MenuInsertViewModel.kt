@@ -1,26 +1,18 @@
 package com.example.menuorder.ui.home
 
 import android.util.Log
-import androidx.annotation.InspectableProperty
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.menuorder.R
 import com.example.menuorder.data.DishDao
 import com.example.menuorder.data.DrinkDao
 import com.example.menuorder.data.MenuRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MenuInsertViewModel(
     private val savedStateHandle: SavedStateHandle,
@@ -84,6 +76,15 @@ class MenuInsertViewModel(
         dishesList.removeAll { it.dish_name.isNullOrEmpty() }
         drinksList.removeAll { it.drink_name.isNullOrEmpty() }
     }
+    fun getAllItem(): Flow<List<Any>> {
+        val dishesStream = menuRepository.getAllDishesStream()
+        val drinksStream = menuRepository.getAllDrinkStream()
+
+        return combine(dishesStream, drinksStream) { dishes, drinks ->
+            dishes + drinks
+        }
+    }
+
 
     fun deleteAllItem() {
         viewModelScope.launch {

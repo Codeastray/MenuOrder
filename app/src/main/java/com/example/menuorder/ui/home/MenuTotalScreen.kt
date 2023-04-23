@@ -52,6 +52,7 @@ object MenuTotalDestination : NavigationDestination {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+
 fun MenuTotalScreen(
     modifier: Modifier = Modifier,
     viewModel: MenuTotalViewModel = viewModel(factory = AppViewModelProvider.Factory),
@@ -59,6 +60,8 @@ fun MenuTotalScreen(
     navController: NavHostController = rememberNavController(),
     navBackToMenuOrder: () -> Unit
 ) {
+
+
     val totalDishUiState by viewModel.totalDishUiState.collectAsState()
     val totalDrinkUiState by viewModel.totalDrinkUiState.collectAsState()
     val toppingName = viewModel.toppingName

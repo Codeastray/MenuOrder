@@ -14,7 +14,7 @@ import com.example.menuorder.ui.home.MenuInsertViewModel
 import com.example.menuorder.ui.theme.MenuOrderTheme
 
 class MainActivity : ComponentActivity() {
-    private lateinit var viewModel: MenuInsertViewModel
+    lateinit var viewModel: MenuInsertViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,8 +33,8 @@ class MainActivity : ComponentActivity() {
 
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         viewModel.deleteAllItem()
     }
 
