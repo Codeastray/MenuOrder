@@ -383,7 +383,7 @@ fun MealOrderCard(
             .size(height = 180.dp, width = 180.dp)
             .padding(9.dp)
             .clickable {
-                viewModel.deleteAllItem()
+
                 badgeNumber += 1
                 viewModel.dishCard(meal.hashCode(), badgeNumber)
                 val payPrice = when (context.getString(meal.meal)) {

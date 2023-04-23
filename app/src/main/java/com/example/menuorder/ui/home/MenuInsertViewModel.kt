@@ -85,7 +85,6 @@ class MenuInsertViewModel(
         }
     }
 
-
     fun deleteAllItem() {
         viewModelScope.launch {
             dishDao.deleteAllDishes()

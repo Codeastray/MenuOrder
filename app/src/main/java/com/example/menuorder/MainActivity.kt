@@ -1,5 +1,6 @@
 package com.example.menuorder
 
+import android.content.ComponentCallbacks2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.room.Room
 import com.example.menuorder.Navigation.MenuNavGraph
 import com.example.menuorder.ui.AppViewModelProvider
 import com.example.menuorder.ui.home.MenuInsertViewModel
@@ -29,14 +31,12 @@ class MainActivity : ComponentActivity() {
                     MenuNavGraph(viewModel = viewModel)
                 }
             }
+            viewModel.deleteAllItem()
         }
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.deleteAllItem()
-    }
+
 
 }
 
